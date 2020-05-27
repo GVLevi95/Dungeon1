@@ -47,7 +47,7 @@ public class Player : MovingObject
         base.AttemptMove<T>(xDir, yDir);
         RaycastHit2D hit;
         if (Move(xDir, yDir, out hit))
-        CheckIfGameOver();
+        //CheckIfGameOver();
         GameManager.instance.playersTurn = false;
     }
 
@@ -82,7 +82,7 @@ public class Player : MovingObject
         SceneManager.LoadScene(0);
     }
 
-    public void LoseFood(int loss)
+    /*public void LoseFood(int loss)
     {
         animator.SetTrigger("playerHit");
         food -= loss;
@@ -95,5 +95,5 @@ public class Player : MovingObject
         {
             GameManager.instance.GameOver();
         }
-    }
+    }*/
 }
