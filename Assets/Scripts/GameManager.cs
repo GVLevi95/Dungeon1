@@ -2,9 +2,11 @@
 using System.Collections;
 
 
-using System.Collections.Generic;        
+using System.Collections.Generic;
+using UnityEngine.UI;           
 using Completed;
 using System;
+                 
 
 public class GameManager : MonoBehaviour
 {
@@ -14,11 +16,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;                
     [HideInInspector] public bool playersTurn = true;       
 
-
+	private Text levelText;
+	private GameObject levelImage;	
     private BoardManager boardScript;                        
     private int level = 1;                                   
     private List<Enemy> enemies;                            
-    private bool enemiesMoving;                               
+    private bool enemiesMoving; 
+	private bool doingSetup = true;  	
 
 
 
@@ -43,13 +47,27 @@ public class GameManager : MonoBehaviour
 
     void InitGame()
     {
+		doingSetup = true;
+		levelImage = GameObject.Find("LevelImage");
+		levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        levelText.text = "Day " + level;
+		levelImage.SetActive(true);
+		Invoke("HideLevelImage", levelStartDelay);
+
         enemies.Clear();
         boardScript.SetupScene(level);
 
     }
+	void HideLevelImage()
+        {
+            
+            levelImage.SetActive(false);
+            doingSetup = false;
+        }
+	
     void Update()
     {
-        if (playersTurn || enemiesMoving)
+        if (playersTurn || enemiesMoving || doingSetup)
             return;
         StartCoroutine(MoveEnemies());
     }
@@ -59,6 +77,7 @@ public class GameManager : MonoBehaviour
     }
     /*public void GameOver()
     {
+		levelText.text = "After " + level + " days, you starved.";
         levelImage.SetActive(true);
         enabled = false;
     }*/
