@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
 	public void GameOver()
 	{
 //		levelText.text = "After " + level + " days, you starved.";
-		levelText.text = "Despues de " + NumberToWords(level).ToLower() + " " + ((level <= 1) ? "Dia" : "Dias") + "has muerto.";
+		levelText.text = "Despues de " + NumberToWords(level).ToLower() + " " + ((level <= 1) ? "Dia" : " Dias ") + "has muerto.";
 		levelImage.SetActive(true);
 
 		enabled = false;
