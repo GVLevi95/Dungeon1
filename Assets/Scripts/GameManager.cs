@@ -43,8 +43,7 @@ public class GameManager : MonoBehaviour
 
 		levelImage = GameObject.Find("LevelImage");
 		levelText = GameObject.Find("LevelText").GetComponent<Text>();
-//		levelText.text = "Day " + level;
-		levelText.text = "Dia " + NumberToWords(level);
+		levelText.text = "Dia " + level;
 		levelImage.SetActive(true);
 
 		Invoke("HideLevelImage", levelStartDelay);
@@ -93,8 +92,7 @@ public class GameManager : MonoBehaviour
 
 	public void GameOver()
 	{
-//		levelText.text = "After " + level + " days, you starved.";
-		levelText.text = "Despues de " + NumberToWords(level).ToLower() + " " + ((level <= 1) ? "Dia" : " Dias ") + "has muerto.";
+		levelText.text = "Despues de " + level + " Dias has muerto.";
 		levelImage.SetActive(true);
 
 		enabled = false;
@@ -122,52 +120,5 @@ public class GameManager : MonoBehaviour
 		playersTurn = true;
 	}
 
-	private static string NumberToWords(int number)
-	{
-		if (number == 0)
-			return "Cero";
-
-		if (number < 0)
-			return "Menos " + NumberToWords(Math.Abs(number));
-
-		string words = "";
-
-		if ((number / 1000000) > 0)
-		{
-			words += NumberToWords(number / 1000000) + " Millon ";
-			number %= 1000000;
-		}
-
-		if ((number / 1000) > 0)
-		{
-			words += NumberToWords(number / 1000) + " Mil ";
-			number %= 1000;
-		}
-
-		if ((number / 100) > 0)
-		{
-			words += NumberToWords(number / 100) + " Cien ";
-			number %= 100;
-		}
-
-		if (number > 0)
-		{
-			if (words != "")
-				words += "y ";
-
-			var unitsMap = new[] { "Cero", "Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "Ocho", "Nueve", "Dies", "Once", "Doce", "Trece", "Catorce", "Quince", "Dieciseis", "Deisiciete", "Diesiocho", "Desinueve" };
-			var tensMap = new[] { "Cero", "Dies", "Veinte", "Treinta", "Cuarenta", "Cincuenta", "Secenta", "Setenta", "Ochenta", "Noventa" };
-
-			if (number < 20)
-				words += unitsMap[number];
-			else
-			{
-				words += tensMap[number / 10];
-				if ((number % 10) > 0)
-					words += "i" + unitsMap[number % 10];
-			}
-		}
-
-		return words;
-	}
+	
 }
