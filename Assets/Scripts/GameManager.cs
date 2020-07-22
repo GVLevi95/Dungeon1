@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 	public float turnDelay = .1f;
 	public float levelStartDelay = 2f;
 
-	private int level = 21;
+	private int level = 0;
 	private List<Enemy> enemies;
 	private bool enemiesMoving;
 	private Text levelText;
